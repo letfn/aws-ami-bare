@@ -38,20 +38,10 @@ platform:
   arch: amd64
 
 steps:
-- name: kaniko
-  image: letfn/drone-kaniko
-  settings:
-    args: --destination=letfn/container
-    cache: true
-    cache_repo: defn/cache
-    dockerfile: alt/Dockerfile
-    password:
-      from_secret: docker_password
-    repo: letfn/container
-    skip_tls_verify: true
-    tag: latest
-    username:
-      from_secret: docker_username
+- name: packer
+  image: letfn/drone-packer
+  commands:
+  - make packer
 
 depends_on:
 - fmt
