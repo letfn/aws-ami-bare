@@ -28,9 +28,9 @@ docs: # Build docs
 build: # Build AMI
 	@echo
 	aws-okta env d-hub | sed 's#^export ##' > .drone.env
-	drone exec --pipeline $@ --env-file .drone.env
+	drone exec --pipeline $@ --env-file .drone.env .drone.yml.packer
 
-packer:
+packer-build:
 	env \
     DEFN_PACKER_FILTERS_NAME="amzn2-ami-ecs-hvm-*" \
     DEFN_PACKER_AMI_NAME="defn-bare-$(shell date +%s)" \
